@@ -1,0 +1,18 @@
+
+:root {
+  background-color: black;
+  color: white;
+}
+
+
+.page {
+    margin: auto;
+    width: 880px;
+    max-width: 100%;
+    min-width: 320px;
+     
+  }
+
+  .ico{
+    border-radius: 50% ;
+  }
