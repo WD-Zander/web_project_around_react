@@ -1,33 +1,20 @@
-
-
-import CloseBtn from '../../../../images/CloseIcon.png';
+import CloseBtn from "../../../../images/CloseIcon.png";
 export default function Popup(props) {
-    //los hijos son el contenido de la ventana emergente
-    console.log(props);
-    const {onClose, title, children} = props;
-    return (
-        <div className="popup">
-        <div className="popup__overlay">
-          <div className="popup__card">
-            <img alt="image" className="popup__image" src=" " />
-            <div className="popoup__title-container">
-              <h2 className="popup__titel">{title}</h2> 
-              
-            </div>
-            {children}
-            <div className="popup__button-container">
-              <button className="popup__button">
-                <img
-                  alt="image"
-                  className="popup__close"
-                  src={CloseBtn}
-                  onClick={onClose} 
-                />
-              </button>
-            </div>
-          </div>
+  //los hijos son el contenido de la ventana emergente
+  console.log(props);
+  const { onClose, title, children } = props;
+  return (
+    <div className="form">
+      <div className="form__fild">
+        <div className="form__fieldset">
+          <img alt="image" className="form__close" src={CloseBtn} onClick={()=>(onClose)} />
+          <h2 className="popup__titel">{title}</h2>
+          {children}
+          <button className="submit__button form__fild--place" disabled>
+            Save
+          </button>
         </div>
       </div>
-      
-    )
-  }
+    </div>
+  );
+}
