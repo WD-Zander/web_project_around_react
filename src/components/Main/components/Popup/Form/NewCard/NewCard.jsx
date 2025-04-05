@@ -1,9 +1,9 @@
+
+import CloseButton from '../../../../../../images/CloseIcon.png';
 export default function NewCard() {
     return (
-        <form className="form form__new-place" id="form__new-place">
-  <div className="form__fild form__fild--place">
-    <fieldset className="form__fieldset form__fild--place">
-      <h2 className="form__title">Nuevo Lugar</h2>
+        <div>
+  
       <input
         className="form__input form__fild--place"
         id="place"
@@ -23,18 +23,7 @@ export default function NewCard() {
         required
         type="url"
       />
-      <span className="form__error urlLink-error" />
-      <button className="submit__button form__fild--place" type="submit">
-        Guardar
-      </button>
-    </fieldset>
-    <img
-      alt="image"
-      className="form__close form__close-place"
-      src="../image/CloseIcon.png"
-    />
-  </div>
-</form>
+    </div>
 
     )
 }

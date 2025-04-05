@@ -1,3 +1,5 @@
+
+import CloseButton from '../../../../../../images/CloseIcon.png';
 export default function EditAvatar() {
    return (
     <form className="form form__avatar" id="form__avatar">
@@ -17,7 +19,7 @@ export default function EditAvatar() {
           Si
         </button>
       </fieldset>
-      <img alt="image" className="form__close" src="../image/CloseIcon.png" />
+      <img alt="image" className="form__close" src={CloseButton} />
     </div>
   </form>
   

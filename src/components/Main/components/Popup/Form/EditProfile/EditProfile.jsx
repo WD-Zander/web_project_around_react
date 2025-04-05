@@ -1,3 +1,4 @@
+import CloseButton from '../../../../../../images/CloseIcon.png';
 export default function EditProfile() {
   return (
     <form className="form" id="form__profile">
@@ -30,7 +31,7 @@ export default function EditProfile() {
             Guardar
           </button>
         </fieldset>
-        <img alt="image" className="form__close" src="../image/CloseIcon.png" />
+        <img alt="image" className="form__close" src={CloseButton} />
       </div>
     </form>
   );
