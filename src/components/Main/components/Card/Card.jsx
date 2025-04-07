@@ -1,12 +1,21 @@
 import deleteBtn from "../../../../images/Trash.png";
 import likeBtn from "../../../../images/card-button/likebutton.png";
+import ImagePopup from "../Popup/ImagePopup/ImagePopup";
 
 export default function Card(props) {
-    const { name, link } = props.card;
+ 
+    const { card, handleOpenPopup } = props;
+    const { name, link } = card;
+  
+    const ImagePopup = {
+      name: name,
+      link: link,
+    };
   
     return (
+
       <div className="card"> 
-        <img src={link} alt="image" className="card__image" />
+        <img src={link} alt="image" className="card__image" onClick={()=>handleOpenPopup(ImagePopup) } />
         <button className="card__trash" id="remove_button">
           <img src={deleteBtn} alt="image" className="image__trash" />
         </button>
@@ -22,6 +31,6 @@ export default function Card(props) {
           </button>
         </div>
       </div>
+     
     );
   }
-  
