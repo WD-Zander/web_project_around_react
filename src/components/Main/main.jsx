@@ -52,6 +52,7 @@ export default function Main() {
 
   return (
     <>
+      <main className="">
       <section className="section">
         <div className="btn__avatar">
           <img
@@ -90,17 +91,20 @@ export default function Main() {
         )}
       </section>
 
-      <main className="cards" onClick={() => console.log("zander")}>
+        <div className="cards" >
         {cards.map((card) => (
           <Card
             key={card._id}
             card={card}
             handleOpenPopup={handleOpenPopupWhitImage} // Pasamos la función como prop
+            
           />
         ))}
+        </div>
+        <ImagePopup card={selectedCard} onClose={handleClosePopup}/>  
       </main>
-
-      <ImagePopup card={selectedCard} onClose={handleClosePopup} />  
+   
+     
     </>
   );
 }
