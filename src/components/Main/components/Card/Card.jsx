@@ -1,6 +1,6 @@
 import deleteBtn from "../../../../images/Trash.png";
-import likeBtn from "../../../../images/card-button/likebutton.png";
-import ImagePopup from "../Popup/ImagePopup/ImagePopup";
+import likeBtn from "../../../../images/likebtn.png";
+
 
 export default function Card(props) {
  

@@ -1,4 +1,4 @@
-import CloseButton from "../../../../../../images/CloseIcon.png";
+
 export default function EditAvatar() {
   return (
     <input

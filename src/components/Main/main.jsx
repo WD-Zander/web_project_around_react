@@ -34,7 +34,7 @@ export default function Main() {
       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
       owner: "5d1f0611d321eb4bdcd707dd",
       createdAt: "2019-07-05T08:11:58.324Z",
-    },
+    }
   ];
 
   function handleOpenPopup(popup) {
@@ -101,9 +101,9 @@ export default function Main() {
           />
         ))}
         </div>
-        <ImagePopup card={selectedCard} onClose={handleClosePopup}/>  
+       
       </main>
-   
+      <ImagePopup card={selectedCard} onClose={handleClosePopup}/>  
      
     </>
   );

@@ -1,9 +1,11 @@
+import CloseButton from "../../../../../images/icone-x-noir.png";
 export default function ImagePopup(props) {
     const { onClose, card } = props;
   
     return (
       <>
-        <div className="popup">
+        <div className="popup popup__open">
+       
         
             {card && (
               <div className="popup__card">
@@ -12,17 +14,20 @@ export default function ImagePopup(props) {
                   <h2 className="popup__titel">{card.name}</h2>
                 </div>
                 <div className="popup__button-container">
-                  <button className="popup__button" onClick={onClose}>
+                  <button className="popup__button">
                     <img
                       alt="image"
                       className="popup__close"
-                      src="../image/icone-x-noir.png"
+                      src={CloseButton}
+                      onClick={onClose}
                     />
                   </button>
                 </div>
               </div>
             )}
-          </div>
+            
+            </div>
+         
        
        
       </>
