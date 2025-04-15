@@ -1,3 +1,5 @@
+
+import React, { useContext } from 'react';
 import avatar from "../../images/avatar.png";
 import vectorPen from "../../images/Vector-pen.png";
 import vector from "../../images/Vector.png";
@@ -7,35 +9,38 @@ import EditProfile from "./components/Popup/Form/EditProfile/EditProfile";
 import NewCard from "./components/Popup/Form/NewCard/NewCard";
 import Card from "./components/Card/Card";
 import ImagePopup from "./components/Popup/ImagePopup/ImagePopup";
+import {api} from "../../utils/api"
+import CurrentUserContext from '../contexts/CurrentUserContext'; // ajusta la ruta si es necesario
 
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+
 
 export default function Main() {
   const [popup, setPopup] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null); // Añadimos el estado para la tarjeta seleccionada
+  const [cards, setCards] = useState([]); //  1. Añado el estado. Para consultar la API
+  const currentUser = useContext(CurrentUserContext);
+
+
 
   const newCardPopup = { title: "New Place", children: <NewCard /> };
   const editProfilePopup = { title: "Edit Profile", children: <EditProfile /> };
   const editAvatarPopup = { title: "Edit Photo", children: <EditAvatar /> };
 
-  const cards = [
-    {
-      isLiked: false,
-      _id: "5d1f0611d321eb4bdcd707dd",
-      name: "Yosemite Valley",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-      owner: "5d1f0611d321eb4bdcd707dd",
-      createdAt: "2019-07-05T08:10:57.741Z",
-    },
-    {
-      isLiked: false,
-      _id: "5d1f064ed321eb4bdcd707de",
-      name: "Lake Louise",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-      owner: "5d1f0611d321eb4bdcd707dd",
-      createdAt: "2019-07-05T08:11:58.324Z",
-    }
-  ];
+useEffect(() => { api.getInitialCards() // 2 Uso UseEffecet para que hace una solicitud a la API
+  .then((res) => {
+    setCards(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  }
+  );
+}
+  , []); // El segundo argumento vacío asegura que el efecto se ejecute solo una vez al montar el componente
+  // Simulando una tarjeta para el ejemplo 
+
+
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -52,59 +57,57 @@ export default function Main() {
 
   return (
     <>
-      <main className="">
-      <section className="section">
-        <div className="btn__avatar">
-          <img
-            alt="image"
-            className="pen__image-avatar"
-            onClick={() => handleOpenPopup(editAvatarPopup)}
-            src={vectorPen}
-          />
-          <img alt="avatar" className="section_avatar" src={avatar} />
-        </div>
-        <div className="section__name">
-          <div className="section__container">
-            <h1 className="section__profile-info">Zander Garcia</h1>
-            <button className="section__edit">
-              <img
-                alt="image"
-                className="pen__image"
-                onClick={() => handleOpenPopup(editProfilePopup)}
-                src={vectorPen}
-              />
-            </button>
+      <main>
+        <section className="section">
+          <div className="btn__avatar">
+            <img
+              alt="edit avatar"
+              className="pen__image-avatar"
+              onClick={() => handleOpenPopup(editAvatarPopup)}
+              src={vectorPen}
+            />
+            <img alt="avatar" className="section_avatar" src={avatar} />
           </div>
-          <h2 className="section__profile-tag">Explorador</h2>
-        </div>
-        <div
-          className="section__button"
-          onClick={() => handleOpenPopup(newCardPopup)}
-        >
-          <img alt="image" className="button__image" src={vector} />
-        </div>
+          <div className="section__name">
+            <div className="section__container">
+              <h1 className="section__profile-info">{currentUser.name}</h1>
+              <button className="section__edit">
+                <img
+                  alt="edit profile"
+                  className="pen__image"
+                  onClick={() => handleOpenPopup(editProfilePopup)}
+                  src={vectorPen}
+                />
+              </button>
+            </div>
+            <h2 className="section__profile-tag">{currentUser.about}</h2>
+          </div>
+          <div
+            className="section__button"
+            onClick={() => handleOpenPopup(newCardPopup)}
+          >
+            <img alt="add new card" className="button__image" src={vector} />
+          </div>
 
-        {popup && (
-          <Popup onClose={handleClosePopup} title={popup.title}>
-            {popup.children}
-          </Popup>
-        )}
-      </section>
+          {popup && (
+            <Popup onClose={handleClosePopup} title={popup.title}>
+              {popup.children}
+            </Popup>
+          )}
+        </section>
 
-        <div className="cards" >
-        {cards.map((card) => (
-          <Card
-            key={card._id}
-            card={card}
-            handleOpenPopup={handleOpenPopupWhitImage} // Pasamos la función como prop
-            
-          />
-        ))}
+        <div className="cards">
+          {cards.map((card) => (
+            <Card
+              key={card._id}
+              card={card}
+              handleOpenPopup={handleOpenPopupWhitImage}
+            />
+          ))}
         </div>
-       
       </main>
-      <ImagePopup card={selectedCard} onClose={handleClosePopup}/>  
-     
+
+      <ImagePopup card={selectedCard} onClose={handleClosePopup} />
     </>
   );
 }
