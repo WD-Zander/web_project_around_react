@@ -1,25 +1,20 @@
-
-
 .card__button {
   margin-right: 18px;
-  
+ 
 }
 .card__button_active {
-
-  background-image: url(../image/Union.svg);
+  background-image: url(../src/images/Union.svg);
   opacity: 100%;
   background-repeat: no-repeat;
  
- box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 
 .card {
   margin: auto;
   width: 282px;
   position: relative;
   cursor: pointer;
- 
 }
 
 .cards {
@@ -29,24 +24,18 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   gap: 17px;
- 
- 
 }
 
 .card__image {
- 
   display: block;
   width: 282px;
   height: 282px;
   max-width: 100%;
   margin: 0;
   border-radius: 5px 5px 0 0;
-  
- 
 }
 /*.card__image:hover  {-webkit-transform:scale(1.3);transform:scale(1.3);}
 .contenedor {overflow:hidden;} */
- 
 
 .Card__contenedor {
   width: 282px;
@@ -55,8 +44,6 @@
   display: flex;
   padding: 25px 0 31px 0;
   border-radius: 0px 0 10px 10px;
- 
-  
 }
 
 .card__titel {
@@ -74,7 +61,6 @@
   overflow: hidden;
   margin-left: 18px;
 }
-
 
 @media screen and (max-width: 880px) {
   .card {

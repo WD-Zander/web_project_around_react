@@ -55,6 +55,30 @@ useEffect(() => { api.getInitialCards() // 2 Uso UseEffecet para que hace una so
     setSelectedCard(null); // Limpiamos selectedCard al cerrar el popup
   }
 
+  function handleCardLike(card) {
+    const isLiked = card.likes?.some(user => user._id === currentUser._id) || false;
+  
+    api
+      .like(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => console.error(err));
+  }
+  
+
+  async function handleCardDelete(card) {
+    try {
+      await api.deleteCard(card._id);
+      setCards((state) => state.filter((c) => c._id !== card._id));
+    } catch (error) {
+      console.error('Error al eliminar la tarjeta:', error);
+    }
+  }
+
+
   return (
     <>
       <main>
@@ -66,7 +90,7 @@ useEffect(() => { api.getInitialCards() // 2 Uso UseEffecet para que hace una so
               onClick={() => handleOpenPopup(editAvatarPopup)}
               src={vectorPen}
             />
-            <img alt="avatar" className="section_avatar" src={avatar} />
+            <img alt="avatar" className="section_avatar" src={currentUser.avatar} />
           </div>
           <div className="section__name">
             <div className="section__container">
@@ -102,6 +126,8 @@ useEffect(() => { api.getInitialCards() // 2 Uso UseEffecet para que hace una so
               key={card._id}
               card={card}
               handleOpenPopup={handleOpenPopupWhitImage}
+              onCardLike={handleCardLike}        
+              onCardDelete={handleCardDelete}
             />
           ))}
         </div>
